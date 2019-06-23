@@ -41,6 +41,8 @@ class Recognize:
 
 
 
+
+
 if __name__ == '__main__':
     pp = Recognize('./Images/1.jpg')
     pp.Get_Plate()
