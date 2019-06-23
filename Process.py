@@ -37,13 +37,11 @@ class PhotoPro:
         self.color_img = cv2.imread(self.color_img)
 
         # Change img to a grey image
-        self.grey_img = cv2.cvtColor(self.color_img, cv2.COLOR_BGR2GRAY)
+        self.gray_img = cv2.cvtColor(self.color_img, cv2.COLOR_BGR2GRAY)
         ## cv2.imshow('Grey Figure', self.img)
 
     # Main process calling function to sign the area of license plate
     def Edge_Search(self):
-        image = self.grey_img
-
         # To locate the license plate
 
         # using the cascade.xml to locate
@@ -54,7 +52,7 @@ class PhotoPro:
         # reference to the CSDN blog https://blog.csdn.net/lql0716/article/details/72566839
 
         ###################################################################################
-        cascade_path = 'cascade.xml'
+        cascade_path = './data/cascade.xml'
         cascade = cv2.CascadeClassifier(cascade_path)  # classifier
 
         # To detect the area  most like the license plate in the original picture
@@ -80,15 +78,12 @@ class PhotoPro:
         ## cv2.waitKey(0)
         ## cv2.destroyAllWindows()
         ###################################################################################
-
         # Return the license plate
         # And we choose the colorful plate, because we need to recognize the color, too
         return plate
 
 
 # Test the class
-"""
 if __name__ == '__main__':
     pp = PhotoPro('./Images/1.jpg')
     pp.Get_Image()
-"""

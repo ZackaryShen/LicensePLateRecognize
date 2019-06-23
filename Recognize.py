@@ -15,11 +15,20 @@
 # tips: Comments annotated with ## are testing codes
 
 
-import pytesseract
-from Process import PhotoPro
+import tkinter as tk
+from tkinter.filedialog import *
+from tkinter import ttk
 import cv2
+from Process import PhotoPro
+from PIL import Image, ImageTk
+import threading
+import time
+import predict
 
-class Recognize:
+# predict is a recognize py file written by wzh from github
+# homepage of wzh: https://github.com/wzh191920
+
+class Recognizes:
     """
     This is a class that recognize the characters from a photo
     """
@@ -34,15 +43,13 @@ class Recognize:
         photopro = PhotoPro(self.image_path)
         color_plate = photopro.Get_Image()
 
-        # change the license to grey image, use it to recognize characters
-        grey_palte = cv2.cvtColor(color_plate, cv2.COLOR_BGR2RGB)
-
-
-
-
-
-
+        # create a object from predict which can recognize plate
+        cpd = predict.CardPredictor()
+        cpd.train_svm()
+        # write plate
+        cv2.imwrite('test.jpg', color_plate)
+        return cv2.imread('./test.jpg')
 
 if __name__ == '__main__':
-    pp = Recognize('./Images/1.jpg')
+    pp = Recognizes('./Images/6.jpg')
     pp.Get_Plate()
