@@ -85,21 +85,6 @@ class Surface(ttk.Frame):
             self.r_ctl.configure(text="")
             self.color_ctl.configure(state='disabled')
 
-    # 从摄像头获取照片，可以不要
-    def from_vedio(self, mBox=None):
-        if self.thread_run:
-            return
-        if self.camera is None:
-            self.camera = cv2.VideoCapture(0)
-            if not self.camera.isOpened():
-                mBox.showwarning('警告', '摄像头打开失败！')
-                self.camera = None
-                return
-        self.thread = threading.Thread(target=self.vedio_thread, args=(self,))
-        self.thread.setDaemon(True)
-        self.thread.start()
-        self.thread_run = True
-
     # 选择图片来源
     def from_pic(self):
         self.thread_run = False
